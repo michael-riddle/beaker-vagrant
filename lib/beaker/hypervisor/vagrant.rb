@@ -63,6 +63,7 @@ module Beaker
         v_file << "    v.vm.box_download_insecure = '#{host['box_download_insecure']}'\n" unless host['box_download_insecure'].nil?
         v_file << "    v.vm.box_check_update = '#{host['box_check_update'] ||= 'true'}'\n"
         v_file << "    v.vm.synced_folder '.', '/vagrant', disabled: true\n" if host['synced_folder'] == 'disabled'
+        v_file << "    v.vbguest.installer_options = { allow_kernel_upgrade: true }\n"
         v_file << shell_provisioner_generator(host['shell_provisioner']) if host['shell_provisioner']
         v_file << private_network_generator(host) if host['ip']
 
